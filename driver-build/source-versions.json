@@ -1,0 +1,15 @@
+{
+  "driver_repo": "morrownr/88x2bu-20210702",
+  "driver_commit": "418d71cc00cd18b4a671f8c49ecce9b19cbfd3c9",
+  "kernel_repo": "C457/android_kernel_telechips_tcc897x",
+  "kernel_commit": "3402d473aed6a2b82c5d08e0ceafc4a54701a4a0",
+  "archive_sha256": {
+    "kernel.tar.gz": "1c6135ee4e6854d0af58a0caf5d43aab44093da96e203149f6a2232ba96bc025",
+    "driver.tar.gz": "788e5178d8b654eb01a965a95b1f45d2d0e9365b6b4d5a442d66a7fc026a8eed",
+    "xenial-arm64.tar.gz": "3e1ed4a7e5ba750e2ce3556a3de1f4735b5571d8edb3c90a4ba36b6697d783d6"
+  },
+  "download_urls": {
+    "kernel.tar.gz": "https://codeload.github.com/C457/android_kernel_telechips_tcc897x/tar.gz/3402d473aed6a2b82c5d08e0ceafc4a54701a4a0",
+    "xenial-arm64.tar.gz": "https://cdimage.ubuntu.com/ubuntu-base/releases/16.04/release/ubuntu-base-16.04.6-base-arm64.tar.gz"
+  }
+}

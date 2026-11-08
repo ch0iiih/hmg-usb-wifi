@@ -1,0 +1,42 @@
+{
+  "id": "wifi-client-test",
+  "name": "Wi-Fi Client Test",
+  "version": "0.1.4",
+  "hmgapi": ">=1.0.2",
+  "authors": [
+    "Local build"
+  ],
+  "license": "AGPL-3.0",
+  "description": "Keeps the Wi-Fi settings features available for testing the stock external-network client. Disable Wireless Phone Projection before enabling this mod. Enable USB Wi-Fi Driver 0.1.6 or later, apply, restart, and operate the Wi-Fi switch manually.",
+  "system": {
+    "region": "KOR"
+  },
+  "requires": [
+    "usb-wifi-rtl8822bu >=0.1.6"
+  ],
+  "conflicts": [
+    "wireless-phone-projection",
+    "wireless-carplay-aa"
+  ],
+  "feature_flags": [
+    "android.hardware.wifi",
+    "com.hkmc.software.wifihotspot"
+  ],
+  "services": [
+    {
+      "name": "driver-state",
+      "jar": "client.jar",
+      "class": "hmgapi.mods.usbwifi.WifiClientState",
+      "user": "root",
+      "start": "android",
+      "restart": true
+    }
+  ],
+  "hooks": {
+    "jar": "hooks.jar",
+    "entry": "hmgapi.mods.usbwifi.ClientUsbGuard",
+    "points": {
+      "framework.context_impl.start_service": "replace"
+    }
+  }
+}

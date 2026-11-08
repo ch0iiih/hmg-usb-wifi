@@ -1,0 +1,122 @@
+--- a/os_dep/linux/os_intfs.c
++++ b/os_dep/linux/os_intfs.c
+@@ -382,7 +382,7 @@
+ #endif
+ 
+ char rtw_country_unspecified[] = {0xFF, 0xFF, 0x00};
+-char *rtw_country_code = rtw_country_unspecified;
++char *rtw_country_code = "KR";
+ module_param(rtw_country_code, charp, 0644);
+ MODULE_PARM_DESC(rtw_country_code, "The default country code (in alpha2)");
+ 
+@@ -503,6 +503,18 @@
+ int rtw_nm = 1;/*noise monitor*/
+ module_param(rtw_nm, int, 0644);
+ #endif
++
++/* Parameters consumed by the stock Mobis Wi-Fi HAL. */
++static char iface_name[IFNAMSIZ];
++static char firmware_path[256];
++static char nvram_path[256];
++static char clm_path[256];
++static char mac_address_read[18];
++module_param_string(iface_name, iface_name, sizeof(iface_name), 0444);
++module_param_string(firmware_path, firmware_path, sizeof(firmware_path), 0444);
++module_param_string(nvram_path, nvram_path, sizeof(nvram_path), 0444);
++module_param_string(clm_path, clm_path, sizeof(clm_path), 0444);
++module_param_string(mac_address_read, mac_address_read, sizeof(mac_address_read), 0444);
+ 
+ char *ifname = "wlan%d";
+ module_param(ifname, charp, 0644);
+@@ -1409,7 +1421,7 @@
+ 	registry_par->enable80211d = (u8)rtw_80211d;
+ #endif
+ 
+-	snprintf(registry_par->ifname, 16, "%s", ifname);
++	snprintf(registry_par->ifname, 16, "%s", iface_name[0] ? iface_name : ifname);
+ 	snprintf(registry_par->if2name, 16, "%s", if2name);
+ 
+ 	registry_par->notch_filter = (u8)rtw_notch_filter;
+@@ -2198,6 +2210,8 @@
+ #endif
+ 
+ 	/* Tell the network stack we exist */
++	if (is_primary_adapter(adapter))
++		snprintf(mac_address_read, sizeof(mac_address_read), "%pM", adapter_mac_addr(adapter));
+ 
+ 	if (rtnl_lock_needed)
+ 		ret = (register_netdev(ndev) == 0) ? _SUCCESS : _FAIL;
+--- a/os_dep/linux/rtw_android.c
++++ b/os_dep/linux/rtw_android.c
+@@ -596,6 +596,55 @@
+ }
+ #endif /* CONFIG_RTW_MESH_AEK */
+ 
++/* Translate the Broadcom vendor IE command used by the stock Mobis hostapd. */
++static int mobis_add_ie(struct net_device *net, const char *command)
++{
++	_adapter *adapter = (_adapter *)rtw_netdev_priv(net);
++	struct mlme_priv *mlme = &adapter->mlmepriv;
++	char oui[7], data[129], trailing;
++	u8 ie[69];
++	u32 mask;
++	int packet, i, high, low;
++	size_t data_length;
++
++	if (sscanf(command, "add_ie %d %6s %128s %c", &packet, oui, data, &trailing) != 3)
++		return -EINVAL;
++	data_length = strlen(data);
++	if (strlen(oui) != 6 || !data_length || data_length % 2)
++		return -EINVAL;
++
++	switch (packet) {
++	case 0:
++		mask = WIFI_BEACON_VENDOR_IE_BIT;
++		break;
++	case 1:
++		mask = WIFI_PROBERESP_VENDOR_IE_BIT;
++		break;
++	case 2:
++		mask = WIFI_ASSOCRESP_VENDOR_IE_BIT;
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	ie[0] = WLAN_EID_VENDOR_SPECIFIC;
++	ie[1] = 3 + data_length / 2;
++	for (i = 0; i < 6 + data_length; i += 2) {
++		const char *source = i < 6 ? oui + i : data + i - 6;
++		high = hex_to_bin(source[0]);
++		low = hex_to_bin(source[1]);
++		if (high < 0 || low < 0)
++			return -EINVAL;
++		ie[2 + i / 2] = (high << 4) | low;
++	}
++
++	_rtw_memcpy(mlme->vendor_ie[0], ie, ie[1] + 2);
++	mlme->vendor_ielen[0] = ie[1] + 2;
++	mlme->vendor_ie_mask[0] |= mask;
++	update_beacon(adapter, 0xFF, NULL, _TRUE, 0);
++	return 0;
++}
++
+ int rtw_android_priv_cmd(struct net_device *net, struct ifreq *ifr, int cmd)
+ {
+ 	#define PRIVATE_COMMAND_MAX_LEN        8192
+@@ -680,6 +729,15 @@
+ 	RTW_INFO("%s: Android private cmd \"%s\" on %s\n"
+ 		 , __FUNCTION__, command, ifr->ifr_name);
+ 
++	if (strncmp(command, "add_ie ", 7) == 0) {
++		ret = mobis_add_ie(net, command);
++		if (ret)
++			goto exit;
++		memcpy(command, "OK", 3);
++		bytes_written = 2;
++		goto response;
++	}
++
+ 	cmd_num = rtw_android_cmdstr_to_num(command);
+ 
+ 	switch (cmd_num) {

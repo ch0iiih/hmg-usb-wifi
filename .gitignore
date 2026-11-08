@@ -1,0 +1,12 @@
+host-test/
+__pycache__/
+*.pyc
+*.key
+*.pem
+*.p12
+*.part
+driver-build/downloads/kernel.tar.gz
+driver-build/downloads/xenial-arm64.tar.gz
+driver-build/build/*
+!driver-build/build/compatibility.json
+packages/*/META-HMGAPI/

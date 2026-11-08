@@ -1,0 +1,78 @@
+{
+  "required_symbols": 198,
+  "missing_symbols": [],
+  "stock_vermagic": "vermagic=3.18.24-tcc SMP preempt mod_unload ARMv7 p2v8 ",
+  "candidate_vermagic": "vermagic=3.18.24-tcc SMP preempt mod_unload ARMv7 p2v8 ",
+  "usb_2357_012e_alias": [
+    "alias=usb:v2357p012Ed*dc*dsc*dp*icFFiscFFipFFin*"
+  ],
+  "shared_named_types": 539,
+  "matching_shared_named_types": 538,
+  "different_shared_named_types": [
+    {
+      "tag": "DW_TAG_structure_type",
+      "name": "linux_mib",
+      "stock": [
+        [
+          416,
+          [
+            [
+              "mibs",
+              0,
+              null,
+              null,
+              [
+                "array",
+                [
+                  [
+                    0,
+                    103,
+                    null
+                  ]
+                ],
+                [
+                  "DW_TAG_base_type",
+                  "long unsigned int",
+                  4
+                ]
+              ]
+            ]
+          ]
+        ]
+      ],
+      "candidate": [
+        [
+          412,
+          [
+            [
+              "mibs",
+              0,
+              null,
+              null,
+              [
+                "array",
+                [
+                  [
+                    0,
+                    102,
+                    null
+                  ]
+                ],
+                [
+                  "DW_TAG_base_type",
+                  "long unsigned int",
+                  4
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    }
+  ],
+  "limits": [
+    "Only named types represented in both modules' DWARF are compared.",
+    "Pointer targets and function signatures require separate review.",
+    "A successful static comparison does not establish runtime compatibility."
+  ]
+}
