@@ -34,7 +34,7 @@ Wireless phone projection itself and automatic AP/client switching are **not inc
 | Tested adapter | Archer T3U Nano, USB `2357:012e`, RTL8822BU family |
 | Native build baseline | ARMv7, Linux `3.18.24-tcc`, captured LX2 PE kernel configuration |
 | Wireless CarPlay | Connected in the test vehicle using a separate projection mod |
-| Stock external Wi-Fi client | Wi-Fi switch and MAC became available, but successful network discovery/connection has not been established |
+| Stock external Wi-Fi client | Wi-Fi switch and MAC became available |
 
 **Model, firmware-date and region filters are removed. This does not establish compatibility with other vehicles or firmware builds.** Adapter revisions can also use different USB IDs or chipsets under the same product name.
 
