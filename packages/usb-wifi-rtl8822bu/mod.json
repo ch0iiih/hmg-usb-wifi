@@ -1,7 +1,7 @@
 {
   "id": "usb-wifi-rtl8822bu",
   "name": "USB Wi-Fi Driver (Archer T3U Nano)",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "hmgapi": ">=1.0.2",
   "authors": [
     "Local build",
@@ -11,9 +11,6 @@
   ],
   "license": "GPL-2.0",
   "description": "Experimental RTL8822BU driver for USB 2357:012e. Provides the stock Wi-Fi HAL interface and exports driver diagnostics to USB-WIFI-LOGS. Remove USBWifi Hotspot Enabler and restart the unit before applying. Wireless projection requires separate configuration and testing.",
-  "system": {
-    "region": "KOR"
-  },
   "probe": {
     "script": "probe.sh"
   },

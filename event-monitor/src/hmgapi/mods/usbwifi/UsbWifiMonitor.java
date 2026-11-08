@@ -176,7 +176,7 @@ public final class UsbWifiMonitor {
                 }
             }
         }, "USBWiFiShutdown"));
-        System.out.println("USB Wi-Fi 0.1.6 event service ready");
+        System.out.println("USB Wi-Fi 0.1.7 event service ready");
         request("startup", 0);
     }
 

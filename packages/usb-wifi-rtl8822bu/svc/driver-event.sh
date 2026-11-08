@@ -25,7 +25,7 @@ log() {
 
 snapshot() {
     {
-        echo "version=0.1.6"
+        echo "version=0.1.7"
         echo "captured=$(date)"
         echo "product=$(getprop ro.build.product)"
         echo "boot=$boot"

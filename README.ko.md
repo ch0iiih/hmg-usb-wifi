@@ -8,8 +8,8 @@ HMG-API용 Archer T3U Nano USB Wi-Fi 드라이버와 외부 Wi-Fi 접속 진단 
 
 [릴리즈 페이지](https://github.com/ch0iiih/hmg-usb-wifi/releases)에서 설치 ZIP을 받을 수 있습니다.
 
-- [USB Wi-Fi Driver 0.1.6](dist/usb-wifi-rtl8822bu-0.1.6.zip)
-- [Wi-Fi Client Test 0.1.4](dist/wifi-client-test-0.1.4.zip)
+- [USB Wi-Fi Driver 0.1.7](dist/usb-wifi-rtl8822bu-0.1.7.zip)
+- [Wi-Fi Client Test 0.1.5](dist/wifi-client-test-0.1.5.zip)
 
 ## 주요 기능
 
@@ -22,10 +22,10 @@ HMG-API용 Archer T3U Nano USB Wi-Fi 드라이버와 외부 Wi-Fi 접속 진단 
 
 ## 호환성 및 현재 상태
 
-- HMG-API 1.0.2 이상, 한국형(KOR) 시스템을 대상으로 합니다.
+- HMG-API 1.0.2 이상을 대상으로 합니다. 설치 시 차종·펌웨어 날짜·지역 필터를 적용하지 않습니다.
 - 확인한 어댑터는 TP-Link Archer T3U Nano, USB ID `2357:012e`, RTL8822BU 계열입니다. 같은 제품명이어도 하드웨어 리비전에 따라 USB ID나 칩셋이 다를 수 있습니다.
 - 실차 확인 환경은 국내 팰리세이드 LX2 PE, 펌웨어 `260902`입니다. 별도 무선 프로젝션 모드와 함께 무선 CarPlay 연결을 확인했습니다.
-- **차종 및 펌웨어 날짜 필터는 없습니다. 다른 차량이나 다른 펌웨어에서의 동작을 보장하지 않습니다.** 지역 필터는 KOR로 유지합니다.
+- **차종·펌웨어 날짜·지역 필터는 없습니다. 다른 차량·펌웨어·지역에서의 동작을 보장하지 않습니다.** 드라이버의 KR 국가·채널 설정은 유지합니다. 설치 지역 필터 해제가 무선 국가 설정 변경을 뜻하지는 않습니다.
 - 드라이버 교체 시 HMG-API가 기존 `/system/wifi/bcmdhd.ko`의 기준 MD5 `ac5bff41f934c996eff5208dbcd9550f`를 검사합니다. 다른 원본 파일이면 교체를 거부합니다. 이 검사는 전체 커널 ABI 검증을 대신하지 않습니다.
 - 이 모듈은 캡처한 ARMv7 `3.18.24-tcc` 커널 설정을 기준으로 빌드했습니다. 같은 드라이버 파일을 사용하더라도 커널과 플랫폼이 다른 경우 추가 검증이 필요합니다.
 - **외부 Wi-Fi 검색·접속은 아직 실차에서 성공을 확인하지 못했습니다.** Client Test는 진단용입니다. 이 저장소에는 AP/클라이언트 자동 전환이나 무선 프로젝션 기능 자체가 포함되지 않습니다.
@@ -63,6 +63,8 @@ USB 저장장치에 `USB-WIFI-LOGS` 폴더를 만들고 헤드유닛에 연결�
 - 이 저장소의 Java 서비스·훅 및 호스트 도구: AGPL-3.0. 드라이버 소스의 기존 라이선스와 저작권 표시는 유지합니다. 라이선스 전문은 `LICENSES/`에 있습니다.
 
 ## 변경 내역
+
+- Driver 0.1.7 / Client Test 0.1.5: KOR 설치 필터 제거. 원본 드라이버 검사와 기존 KR 채널 설정 유지.
 
 - Driver 0.1.6 / Client Test 0.1.4: 펌웨어 날짜 필터 제거. KOR 지역 조건과 기존 드라이버 검사 유지.
 - Driver 0.1.5 / Client Test 0.1.3: 차종 필터 제거.

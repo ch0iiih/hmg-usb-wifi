@@ -1,6 +1,6 @@
 # Wi-Fi Client Test
 
-Keep USB Wi-Fi Driver enabled and update it to 0.1.6 or later. Disable Wireless
+Keep USB Wi-Fi Driver enabled and update it to 0.1.7 or later. Disable Wireless
 Phone Projection and Wireless CarPlay + Android Auto. Enable this test mod, apply
 changes, and restart the unit. Insert the T3U Nano, open the stock Wi-Fi settings,
 and enable Wi-Fi manually. Check for an access-point list and connection.
@@ -28,3 +28,7 @@ Other models still need driver and framework compatibility verification.
 Build 0.1.4 removes the firmware-date filter and requires USB Wi-Fi Driver 0.1.6.
 KOR region filtering remains. Other firmware builds need driver ABI and HMG-API
 hook-map compatibility validation; client scanning and connection remain unverified.
+
+Build 0.1.5 removes the KOR installation filter and requires Driver 0.1.7.
+No model, firmware-date or region metadata filter remains. Other-region framework
+hooks and Wi-Fi operation require separate validation. Driver channels remain KR.

@@ -1,6 +1,6 @@
 # USB Wi-Fi Driver for Archer T3U Nano
 
-Experimental build 0.1.6 for KOR systems and USB device 2357:012e.
+Experimental build 0.1.7 for Gen5W systems and USB device 2357:012e.
 Model and firmware-date filtering are removed. The captured LX2PE kernel configuration and exact
 original-driver checksum still define the compiled driver compatibility.
 
@@ -53,3 +53,7 @@ startup or attachment when wlan0 is absent. It leaves bound devices alone.
 Build 0.1.6 removes the firmware-date filter. KOR region filtering and the exact
 original-driver checksum remain. Tested hardware is the Korean LX2 PE on 260902;
 removing metadata filters does not establish other-firmware kernel compatibility.
+
+Build 0.1.7 removes the KOR installation filter. No model, firmware-date or region
+metadata filter remains. The native module is unchanged, including its KR regulatory
+configuration. Other-region driver, kernel and framework compatibility is unverified.

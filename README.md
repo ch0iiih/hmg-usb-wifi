@@ -10,8 +10,8 @@ Get the signed installation ZIPs from the [releases page](https://github.com/ch0
 
 | Package | Version | Purpose |
 | --- | --- | --- |
-| [USB Wi-Fi Driver](dist/usb-wifi-rtl8822bu-0.1.6.zip) | 0.1.6 | RTL8822BU driver, stock HAL integration, event monitoring and USB diagnostics |
-| [Wi-Fi Client Test](dist/wifi-client-test-0.1.4.zip) | 0.1.4 | Stock Wi-Fi client diagnostics; external-network scanning and connection remain unverified |
+| [USB Wi-Fi Driver](dist/usb-wifi-rtl8822bu-0.1.7.zip) | 0.1.7 | RTL8822BU driver, stock HAL integration, event monitoring and USB diagnostics |
+| [Wi-Fi Client Test](dist/wifi-client-test-0.1.5.zip) | 0.1.5 | Stock Wi-Fi client diagnostics; external-network scanning and connection remain unverified |
 
 ## Features
 
@@ -29,16 +29,18 @@ Wireless phone projection itself and automatic AP/client switching are **not inc
 | Item | Scope |
 | --- | --- |
 | HMG-API | 1.0.2 or newer |
-| Region | KOR; this region filter remains enabled |
+| Installation filters | No model, firmware-date or region filter |
 | Tested vehicle | Korean-market Palisade LX2 PE, firmware `260902` |
 | Tested adapter | Archer T3U Nano, USB `2357:012e`, RTL8822BU family |
 | Native build baseline | ARMv7, Linux `3.18.24-tcc`, captured LX2 PE kernel configuration |
 | Wireless CarPlay | Connected in the test vehicle using a separate projection mod |
 | Stock external Wi-Fi client | Wi-Fi switch and MAC became available, but successful network discovery/connection has not been established |
 
-**Model and firmware-date filters are removed. This does not establish compatibility with other vehicles or firmware builds.** Adapter revisions can also use different USB IDs or chipsets under the same product name.
+**Model, firmware-date and region filters are removed. This does not establish compatibility with other vehicles or firmware builds.** Adapter revisions can also use different USB IDs or chipsets under the same product name.
 
 HMG-API checks an existing `/system/wifi/bcmdhd.ko` against baseline MD5 `ac5bff41f934c996eff5208dbcd9550f` before replacing it. A different original file is rejected. This file check does not validate the entire running kernel ABI. Client Test also needs a suitable HMG-API hook map; removing an installer filter does not create one.
+
+The native module retains its **KR country/channel configuration**. Removing the installation region filter does not change radio settings. Other-region kernel, driver and framework behavior remain unverified.
 
 ## Installation
 
@@ -74,6 +76,8 @@ See [BUILD.md](BUILD.md) for build inputs, signing and host tests. Rebuilt packa
 - Local Java services, hooks and host tools: AGPL-3.0. Existing upstream notices remain intact. Full license texts are under `LICENSES/`.
 
 ## Changelog
+
+- **Driver 0.1.7 / Client Test 0.1.5:** remove the KOR installation filter; retain original-driver checks and existing KR channel configuration.
 
 - **Driver 0.1.6 / Client Test 0.1.4:** remove firmware-date filtering; retain KOR filtering and the original-driver check.
 - **Driver 0.1.5 / Client Test 0.1.3:** remove model filtering.

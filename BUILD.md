@@ -58,8 +58,8 @@ captured stock `bcmdhd.ko`. The OEM module is not redistributed here.
 python3 test-package.py
 python3 test-client-package.py
 python3 test-monitor.py
-HMGAPI_TEST_PRODUCT=CVEV.KOR.0000.V039.001.261001 python3 test-package.py
-HMGAPI_TEST_PRODUCT=CVEV.KOR.0000.V039.001.261001 python3 test-client-package.py
+HMGAPI_TEST_PRODUCT=CVEV.USA.0000.V039.001.261001 python3 test-package.py
+HMGAPI_TEST_PRODUCT=CVEV.USA.0000.V039.001.261001 python3 test-client-package.py
 ```
 
 The alternative product string tests removed metadata restrictions in a simulated

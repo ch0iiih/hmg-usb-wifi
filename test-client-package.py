@@ -15,7 +15,7 @@ with tempfile.TemporaryDirectory(dir=ROOT/'host-test') as directory:
  env=dict(os.environ,HMGAPI_ROOT=str(root),HMGAPI_HOST='1',HMGAPI_PRODUCT=os.environ.get('HMGAPI_TEST_PRODUCT','LX2PE.KOR.0000.V039.001.260902'),HMGAPI_ONEBIN='lx2pe_kr')
  def engine(*args):
   return subprocess.run(['java','-cp',os.environ['HMGAPI_ENGINE_CLASSES'],'hmgapi.engine.Engine',*args],env=env,capture_output=True,text=True)
- for package in ['usb-wifi-rtl8822bu-0.1.6.zip','wifi-client-test-0.1.4.zip']:
+ for package in ['usb-wifi-rtl8822bu-0.1.7.zip','wifi-client-test-0.1.5.zip']:
   r=engine('install',str(OUTPUT/package));assert r.returncode==0,r.stdout+r.stderr
  print('PASS signed client-test and driver packages imported')
  old=root/'data/hmgapi/mods/wireless-phone-projection';old.mkdir()

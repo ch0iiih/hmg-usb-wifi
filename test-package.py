@@ -30,7 +30,7 @@ with tempfile.TemporaryDirectory(prefix="usb-wifi-test-", dir=ROOT / "host-test"
             print(result.stdout + result.stderr)
         return result
 
-    archive = ROOT / "dist/usb-wifi-rtl8822bu-0.1.6.zip"
+    archive = ROOT / "dist/usb-wifi-rtl8822bu-0.1.7.zip"
     result = engine("install", str(archive))
     assert result.returncode == 0, result.stdout + result.stderr
     print("PASS signed ZIP imported through the real package installer")
